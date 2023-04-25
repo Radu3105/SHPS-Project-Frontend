@@ -1,38 +1,257 @@
-.App {
-  text-align: center;
+body {
+    background-color:dodgerblue;
+    font-weight: 100;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a:link { text-decoration: none; color: black }
+a:visited { text-decoration: none; color: black }
+a:hover { text-decoration: none; color: black }
+a:active { text-decoration: none; color: black }
+
+.home-container {
+    text-align: center;
+    margin-top: 20vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app-title {
+    font-size: 80px;
+    color:white;
+    margin: 100px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.register-btn {
+    margin: 10px;
+    background-color: dodgerblue;
+    color: white;
+    border: 1px solid white;
+    border-radius: 7px;
+    width: 250px;
+    height: 70px;
+    font-size: 28px;
 }
 
-.App-link {
-  color: #61dafb;
+.register-btn:hover {
+    background-color: rgb(0, 111, 181);;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-btn {
+    margin: 10px;
+    background-color: rgb(255, 255, 255);
+    color: dodgerblue;
+    border: none;
+    border-radius: 7px;
+    width: 250px;
+    height: 70px;
+    font-size: 28px;
+}
+
+.login-btn:hover {
+    background-color: rgb(226, 226, 226);
+}
+
+.register-container {
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 18vh;
+    width: 30vw;
+    height: 50vh;
+    background-color: white;
+    color: black;
+    font-size: 30px;
+}
+
+.search-symptom-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    margin: auto;
+    margin-top: 200px;
+    height: 75vh;
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 20px;
+    width: 50%;
+    box-shadow: 5px 5px 10px rgb(77, 77, 77);
+}
+
+.search-symptom-title {
+    text-align: center;
+    font-size: 50px;
+    color:dodgerblue;
+}
+
+.search-symptom-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.search-symptom-input {
+    width: 100%;
+    height: 50px;
+    font-size: 30px;
+    border: 2px solid lightgray;
+}
+
+.search-symptom-dropdown {
+    border: 1px solid black;
+    position: absolute;
+    font-size: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgb(191, 191, 191);
+}
+
+.searched-symptom-option {
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 10px;
+    border: none;
+    height: 70px;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.searched-symptom-option:hover {
+    background-color:rgb(213, 213, 213);
+}
+
+.question-container {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 300px;
+    padding: 50px;
+    height: 50vh;
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 20px;
+    width: 50%;
+}
+
+.question-title {
+    margin-top: -100px;
+    font-size: 45px;
+    font-weight: 500;
+}
+
+.question-answer-btns-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.question-answer-yes-btn {
+    width: 250px;
+    height: 80px;
+    background-color: transparent;
+    border: 3px solid lightseagreen;
+    color: lightseagreen;
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+.question-answer-yes-btn:hover {
+    background-color: lightseagreen;
+    color: white;
+}
+
+.question-answer-no-btn {
+    width: 250px;
+    height: 80px;
+    background-color: transparent;
+    border: 3px solid lightcoral;
+    color: lightcoral;
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+.question-answer-no-btn:hover {
+    background-color: lightcoral;
+    color: white;
+}
+
+.question-answer-dontknow-btn {
+    width: 250px;
+    height: 80px;
+    background-color: transparent;
+    border: 3px solid lightgray;
+    color: lightgray;
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+.question-answer-dontknow-btn:hover {
+    background-color: lightgray;
+    color: white;
+}
+
+.result-container {
+    display: flex;
+    justify-content: center;
+    /* text-align: center; */
+    flex-direction: column;
+    /* align-items: center; */
+    margin: auto;
+    margin-top: 150px;
+    padding: 50px;
+    /* height: 70vh; */
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 20px;
+    width: 75%;
+}
+
+.result-title {
+    text-align: center;
+    font-size: 50px;
+    color:dodgerblue;
+}
+
+.doctor-list-specialization {
+    border-bottom: 2px solid gray;
+    margin-bottom: 50px;
+}
+
+.doctor-list-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-bottom: 1px solid rgb(170, 170, 170); */
+    border-left: 10px solid dodgerblue;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 30px;
+}
+
+.doctor-list-option:hover {
+    background-color: aliceblue;
+}
+
+.doctor-list-option-name {
+    width: 40%;
+}
+
+.doctor-list-option-location {
+    width: 60%;
+}
+
+.problems-prediction {
+    color: dodgerblue;
+    font-size: 35px;
+}
+
+.recommended-doctors {
+    color: dodgerblue;
+    font-size: 35px;
 }

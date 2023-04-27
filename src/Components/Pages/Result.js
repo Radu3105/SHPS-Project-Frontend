@@ -1,12 +1,10 @@
+import { mockPredictions } from "../../mockData";
 import DoctorList from "../DoctorList";
 import PredictionList from "../PredictionList";
 
 export default function Result(props) {
 
-    const specializations = [
-        'cardiovascular',
-        'derma',
-    ];
+    const specializations = [... new Set(mockPredictions)];
 
     return (
         <div className="result-container">

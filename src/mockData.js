@@ -49,6 +49,19 @@ export const mockQuestions = [
     },
 ];
 
+export const mockPredictions = [
+    {
+        'id': 0,
+        'disease': mockDiseases[0],
+        'accuracy': .8,
+    },
+    {
+        'id': 1,
+        'disease': mockDiseases[1],
+        'accuracy': .2,
+    },
+];
+
 export const mockDoctors = [
     {
         'id': 0,
@@ -75,7 +88,7 @@ export const mockDoctors = [
         'location': 'Bucuresti, Romania',
     },
     {
-        'id': 0,
+        'id': 2,
         'status': 'available',
         'firstName': 'A',
         'lastName': 'B',

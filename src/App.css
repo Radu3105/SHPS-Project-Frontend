@@ -1,5 +1,5 @@
 body {
-    background-color:dodgerblue;
+    background-color:rgb(218, 225, 255);
     font-weight: 100;
 }
 
@@ -254,4 +254,20 @@ a:active { text-decoration: none; color: black }
 .recommended-doctors {
     color: dodgerblue;
     font-size: 35px;
+}
+
+.doctor-details-container {
+    display: flex;
+    justify-content: center;
+    /* text-align: center; */
+    flex-direction: column;
+    /* align-items: center; */
+    margin: auto;
+    margin-top: 150px;
+    padding: 50px;
+    /* height: 70vh; */
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 20px;
+    width: 75%;
 }

@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { mockSymptoms, mockQuestions } from "../../mockData";
 import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../../App";
+import axios from 'axios';
 
 export default function SearchSymptom() {
+
     const navigate = useNavigate();
 
-    const [symptom, setSymptom] = useState("");
+    const [targetSymptom, setTargetSymptom] = useState("");
+    const [symptoms, setSymptoms] = useState([]);
+
+    useEffect(() => {
+        const fetchSymptoms = async () => {
+            try {
+                const response = await axios.get(`${API_URL}symptoms/`);
+                setSymptoms(response.data);
+            } catch (error) {
+                console.error("Error fetching symptoms: " + error);
+            }
+        }
+        fetchSymptoms();
+    }, []);
 
     const handleOnClick = () => {
         navigate("/question/0");
@@ -18,17 +34,20 @@ export default function SearchSymptom() {
 
     return (
         <div className="search-symptom-container">
+            <div>
+                {symptoms.map((s) => <p>{s.name}</p>)}
+            </div>
             <form className="search-symptom-form" onSubmit={handleSubmit}>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     <h1 class="search-symptom-title">Search symptoms</h1>
                     <div style={{ position: "relative" }}>
                         <input
                             required
-                            id="symptom"
+                            id="targetSymptom"
                             type="input"
-                            value={symptom}
+                            value={targetSymptom}
                             onChange={(event) =>
-                                setSymptom(event.target.value.toLowerCase())
+                                setTargetSymptom(event.target.value.toLowerCase())
                             }
                             className="search-symptom-input"
                         />
@@ -36,16 +55,19 @@ export default function SearchSymptom() {
                             className="search-symptom-dropdown"
                             onClick={handleOnClick}
                         >
-                            {mockSymptoms
-                                .filter((el) => {
-                                    if (symptom === "") return;
-                                    return el.toLowerCase().includes(symptom);
-                                })
-                                .map((symptom) => (
-                                    <div className="searched-symptom-option">
-                                        <p style={{ margin: "0" }}>{symptom}</p>
-                                    </div>
-                                ))}
+                            { symptoms !== null ?
+                                (
+                                    symptoms.filter((el) => {
+                                        if (targetSymptom === "") return;
+                                        return el.name.toLowerCase().includes(targetSymptom);
+                                    })
+                                    .map((targetSymptom) => (
+                                        <div className="searched-symptom-option">
+                                            <p style={{ margin: "0" }}>{targetSymptom.name}</p>
+                                        </div>)
+                                    )
+                                ) : null 
+                            }
                         </div>
                     </div>
                 </div>

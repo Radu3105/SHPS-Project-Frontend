@@ -1,30 +1,32 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { API_URL } from "../../App";
 
 export default function Login() {
-    
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [isUserValid, setIsUserValid] = useState('');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isUserValid, setIsUserValid] = useState("");
 
     const validateUser = async () => {
         try {
-            const response = await axios.post(`${API_URL}login/`, { email, password });
-            localStorage.setItem('token', response.data.token);
-            window.location.href = '/'; // redirect to home on successful login
+            const response = await axios.post(`${API_URL}login/`, {
+                email,
+                password,
+            });
+            localStorage.setItem("token", response.data.token);
+            window.location.href = "/"; // redirect to home on successful login
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         validateUser();
-    }
+    };
 
-    return ( 
+    return (
         <form className="register-container" onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="email">Email</label>
@@ -48,13 +50,13 @@ export default function Login() {
             </div>
             <div>
                 <Link to="/">
-                        <button type="button">Cancel</button>
-                    </Link>
-                    <Link to="/register">
-                        <button type="button">I do not have an account yet</button>
-                    </Link>
+                    <button type="button">Cancel</button>
+                </Link>
+                <Link to="/register">
+                    <button type="button">I do not have an account yet</button>
+                </Link>
                 <button type="submit">Submit</button>
             </div>
         </form>
-    )
+    );
 }

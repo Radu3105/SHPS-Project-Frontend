@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 
 export default function Home() {
     return (
         <div className="home-container">
-            <h1 className="app-title">Smart Health <br></br> Prediction System</h1>
+            <h1 className="app-title">
+                Smart Health <br></br> Prediction System
+            </h1>
+            <p className="app-made-by">Made by Gîrlea Radu Cristian</p>
             <Link to="/register">
                 <button className="register-btn">Register</button>
             </Link>
@@ -11,9 +14,9 @@ export default function Home() {
                 <button className="login-btn">Log In</button>
             </Link>
             <div>
-                <Link to="/searchSymptom">
+                {/* <Link to="/searchSymptom">
                     <button className="login-btn">Search Symptom</button>
-                </Link>
+                </Link> */}
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { API_URL } from "../../App";
 
 export default function Register(props) {
@@ -23,27 +23,27 @@ export default function Register(props) {
         lastName,
         email,
         password,
-        dateOfBirth,
-        gender,
-        weight = undefined,
-        height = undefined
+        // dateOfBirth,
+        gender
+        // weight = undefined,
+        // height = undefined
     ) => {
         try {
             const response = await axios.post(`${API_URL}register/`, {
-                role,
-                firstName,
-                lastName,
-                email,
-                password,
-                dateOfBirth,
-                gender,
-                weight,
-                height,
+                // role,
+                first_name: firstName,
+                last_name: lastName,
+                // age: Number(dateOfBirth),
+                gender: gender,
+                email: email,
+                password: password,
+                // weight,
+                // height,
             });
-            localStorage.setItem("token", response.data.token);
-            window.location.href = "/"; // redirect to home on successful registration
+            // localStorage.setItem("token", response.data.token);
+            // window.location.href = "/"; // redirect to home on successful registration
         } catch (error) {
-            console.error(error);
+            console.error("Errrrror" + error);
         }
     };
 
@@ -54,17 +54,23 @@ export default function Register(props) {
             return;
         }
         registerUser(
-            role,
+            // role,
             firstName,
             lastName,
-            email,
-            password,
-            dateOfBirth,
+            // Number(dateOfBirth),
             gender,
-            weight,
-            height
+            email,
+            password
+            // weight,
+            // height
         );
         setPasswordMatch(true);
+        console.log(typeof firstName);
+        console.log(typeof lastName);
+        console.log(typeof dateOfBirth);
+        console.log(typeof gender);
+        console.log(typeof email);
+        console.log(typeof password);
         alert("Successfully created account!");
     };
 
@@ -131,7 +137,7 @@ export default function Register(props) {
                 </label>
                 <input
                     required
-                    type="date"
+                    type="text"
                     id="dateOfBirth"
                     name="dateOfBirth"
                     value={dateOfBirth}

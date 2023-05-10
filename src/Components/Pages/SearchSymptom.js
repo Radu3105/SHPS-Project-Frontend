@@ -33,16 +33,14 @@ export default function SearchSymptom() {
                     symptoms: selectedSymptoms,
                 }
             );
-            console.log("Response from the server:");
-            console.log(response.data);
+            navigate(`/question/${response.data.id}`);
+            // console.log(startingQuestion);
         } catch (error) {
             console.error("Error sending symptoms: " + error);
         }
     };
 
     const handleOnContinueClick = () => {
-        // navigate("/question/0");
-        // console.log(selectedSymptoms);
         sendSelectedSymptoms();
     };
 

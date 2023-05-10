@@ -1,11 +1,25 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { mockQuestions } from "../../mockData";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_URL } from "../../App";
 
 export default function Question() {
     let { id } = useParams();
     const navigate = useNavigate();
-    const question = mockQuestions.filter((question) => question.id == id)[0];
-    const specialization = "NA";
+    const [question, setQuestion] = useState("");
+
+    useEffect(() => {
+        const fetchQuestion = async () => {
+            try {
+                const response = await axios.get(`${API_URL}questions/${id}/`);
+                setQuestion(response.data.text);
+            } catch (error) {
+                console.error("Error fetching symptoms: " + error);
+            }
+        };
+        fetchQuestion();
+    }, []);
 
     const handleOnClickYes = () => {
         if (id == mockQuestions.length - 1) navigate("/result/");
@@ -25,7 +39,7 @@ export default function Question() {
     return (
         <div className="question-container">
             <div className="question-title">
-                <p>{question.title}</p>
+                <p>{question}</p>
             </div>
             <div className="question-answer-btns-container">
                 <button

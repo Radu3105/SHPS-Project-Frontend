@@ -28,19 +28,21 @@ export default function SearchSymptom() {
     const sendSelectedSymptoms = async () => {
         try {
             const response = await axios.post(
-                `${API_URL}diseases-by-symptoms/`,
+                `${API_URL}predict/`,
                 {
                     symptoms: selectedSymptoms,
                 }
             );
-            navigate(`/question/${response.data.id}`);
+            // navigate(`/question/${response.data.id}`);
             // console.log(startingQuestion);
+            console.log("POST", response.data);
         } catch (error) {
             console.error("Error sending symptoms: " + error);
         }
     };
 
     const handleOnContinueClick = () => {
+        // console.log(selectedSymptoms);
         sendSelectedSymptoms();
     };
 
@@ -62,7 +64,7 @@ export default function SearchSymptom() {
     return (
         <div className="search-symptom-container">
             <h1 class="search-symptom-title">
-                Let's start off by telling us <br></br>what you feel
+                Let's start! <br></br>What do you feel?
             </h1>
             <form className="search-symptom-form" onSubmit={handleSubmit}>
                 <div
@@ -79,7 +81,7 @@ export default function SearchSymptom() {
                             id="targetSymptom"
                             type="input"
                             value={targetSymptom}
-                            placeholder="Type in a symptom"
+                            placeholder="  type in a symptom, ex. 'headache'"
                             className="search-symptom-input"
                             onChange={(event) =>
                                 setTargetSymptom(

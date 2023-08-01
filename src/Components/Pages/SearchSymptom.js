@@ -10,20 +10,29 @@ export default function SearchSymptom() {
     const [targetSymptom, setTargetSymptom] = useState("");
     const [symptoms, setSymptoms] = useState([]);
     const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+    const [resultPrediction, setResultPrediction] = useState([])
 
-    const mostPopular = symptoms.slice(0, 5);
+    const mostPopular = symptoms.slice(0, 5);    
 
     useEffect(() => {
-        const fetchSymptoms = async () => {
-            try {
-                const response = await axios.get(`${API_URL}symptoms/`);
-                setSymptoms(response.data);
-            } catch (error) {
-                console.error("Error fetching symptoms: " + error);
-            }
-        };
         fetchSymptoms();
     }, []);
+
+    useEffect(() => {
+        if (resultPrediction) {
+            getDiseaseIdByName();
+        }
+    }, [resultPrediction]);
+
+    const fetchSymptoms = async () => {
+        console.log("Fetching...");
+        try {
+            const response = await axios.get(`${API_URL}symptoms/`);
+            setSymptoms(response.data);
+        } catch (error) {
+            console.error("Error fetching symptoms: " + error);
+        }
+    };
 
     const sendSelectedSymptoms = async () => {
         try {
@@ -33,17 +42,28 @@ export default function SearchSymptom() {
                     symptoms: selectedSymptoms,
                 }
             );
-            // navigate(`/question/${response.data.id}`);
-            // console.log(startingQuestion);
-            console.log("POST", response.data);
+            setResultPrediction(response.data.result[0]);
+            // console.log(response.data.result[0]);
         } catch (error) {
             console.error("Error sending symptoms: " + error);
         }
     };
 
-    const handleOnContinueClick = () => {
-        // console.log(selectedSymptoms);
-        sendSelectedSymptoms();
+    const getDiseaseIdByName = async () => {
+        try {
+            console.log(resultPrediction);
+            const response = await axios.get(`${API_URL}diseaseId/${resultPrediction}`);
+            // console.log(response.data);
+            navigate(`/result/${response.data.id}`);
+        }
+        catch(error) {
+            console.error("Error getting id of disease! " + error);
+        }
+    };
+
+    const handleOnContinueClick = async () => {
+        await sendSelectedSymptoms();
+        await getDiseaseIdByName();
     };
 
     const handleOnSymptomClick = (symptom) => {
@@ -64,14 +84,14 @@ export default function SearchSymptom() {
     return (
         <div className="search-symptom-container">
             <h1 class="search-symptom-title">
-                Let's start! <br></br>What do you feel?
+                Search for symptoms
             </h1>
             <form className="search-symptom-form" onSubmit={handleSubmit}>
                 <div
                     style={{
                         display: "flex",
                         flexDirection: "column",
-                        width: "60%",
+                        width: "70%",
                     }}
                 >
                     <div style={{ position: "relative" }}>

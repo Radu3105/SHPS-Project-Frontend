@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 
-export default function Home() {
+export default function Home({ user }) {
     return (
         <>
             <h1
                 style={{
-                    // marginLeft: '10%',
                     textAlign: "center",
-                    marginTop: "6%",
+                    marginTop: "4%",
                     color: "white",
                     fontSize: "60px",
                     letterSpacing: "1px",

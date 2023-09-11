@@ -1,12 +1,5 @@
 html {
     background-color: dodgerblue;
-    /* background: linear-gradient(
-        to bottom right,
-        rgb(87, 171, 255) 0%,
-        dodgerblue 25%,
-        dodgerblue 50%,
-        rgb(0, 53, 106) 100%
-    ); */
     height: 100%;
 }
 
@@ -84,19 +77,6 @@ a:active {
 .login-btn:hover {
     background-color: rgb(208, 208, 208);
     transform: scale(1.05);
-}
-
-.register-container {
-    padding: 100px;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 18vh;
-    width: 30vw;
-    height: 50vh;
-    background-color: white;
-    color: black;
-    font-size: 30px;
 }
 
 .home-container {
@@ -297,15 +277,24 @@ a:active {
 }
 
 .continue-btn {
-    background-color: rgb(29, 175, 0);
-    color: white;
+    background-color: transparent;
+    color: rgb(29, 175, 0);
     width: 120px;
     height: 45px;
     font-size: 20px;
-    border: none;
+    font-weight: bold;
+    border: 3px solid rgb(29, 175, 0);
     margin: 10px;
-    margin-left: calc(85% + 10px);
-    border-radius: 5px;
+    margin-left: calc(84% + 10px);
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 120px;
+}
+
+.continue-btn:hover {
+    color: white;
+    background-color: rgb(29, 175, 0);
 }
 
 .question-container {
@@ -400,7 +389,7 @@ a:active {
     background-color: white;
     border-radius: 25px;
     font-weight: bold;
-    border: 40px inset rgb(112, 66, 32);
+    border: 40px inset rgb(65, 65, 65);
     width: 75%;
     position: relative;
 }
@@ -544,9 +533,202 @@ a:active {
     background-color: white;
     border-radius: 20px;
     width: 100%;
+    padding: 50px;
     box-shadow: 5px 5px 10px rgb(77, 77, 77);
 }
 
 .doctors-table {
 
+}
+
+.diseases-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: calc(100px + 20px);
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 20px;
+    width: 100%;
+    padding: 50px;
+    box-shadow: 5px 5px 10px rgb(77, 77, 77);
+}
+
+.btn-back-to-home {
+    color: red;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: transparent;
+    border: 3px solid red;
+    border-radius: 10px;
+    height: 40px;
+    margin-top: 10px;
+    /* margin-left: 20px; */
+}
+
+.btn-back-to-home:hover {
+    color: white;
+    background-color: red;
+}
+
+.table-header-doctor {
+    margin-top: 10%;
+    height: 50px;
+    font-size: 22px;
+}
+
+.table-row-doctor {
+    height: 48px;
+    font-size: 20px;
+}
+
+.table-row-doctor:hover {
+    background-color: rgb(205, 205, 205);
+}
+
+.disease-list-row {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 20px;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.disease-list-row:hover {
+    background-color: rgb(205, 205, 205);;
+}
+
+/* .table-row-doctor:nth-of-type(even) {
+    background-color: gray;
+} */
+
+.map {
+    height: 50vh;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.register-container {
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+    height: 75%;
+    width: 75%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 100px;
+    margin: auto;
+    width: 50%;
+    margin-top: 150px;
+    border-radius: 20px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    /* overflow-y: scroll; */
+    /* height: 100px; */
+}
+
+.register-container > div {
+    flex: 1;
+}
+
+.register-form > input, h2 {
+    width: 50%;
+    height: 20px;
+    /* margin: 10px; */
+}
+
+.login-container {
+    display: column;
+    flex-direction: row; 
+    height: 50%;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 50px;
+    padding-top: 10px;
+    margin: auto;
+    margin-top: 150px;
+    border-radius: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form > input {
+    font-size: 20px;
+    width: 300px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: start;
+    color: white;
+    margin-right: 50px;
+}
+
+.login-btn-2 {
+    background-color: transparent;
+    color: dodgerblue;
+    border: none;
+    font-size: 25px;
+    height: 50px;
+    width: 150px;
+    margin: 20px;
+    border: 2px solid dodgerblue;
+    border-radius: 10px;
+}
+
+.login-btn-2:hover {
+    color: white;
+    background-color: dodgerblue;
+}
+
+.info-window-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.generate-route-btn {
+    text-align: center;
+    color: dodgerblue;
+    background-color: transparent;
+    border: 2px solid dodgerblue;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-top: 10px;
+    height: 40px;
+    font-weight: 700;
+}
+
+.generate-route-btn:hover {
+    color: white;
+    background-color: dodgerblue;
+}
+
+.logout-btn {
+    color: white;
+    background-color: transparent;
+    /* border: 1px solid white; */
+    border: none;
+    font-size: 20px;
+}
+
+.logout-btn:hover {
+    color: red
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
-import Alert from "react-bootstrap/Alert";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../App";
+import RedirectButton from "../RedirectButton";
 
 export default function SearchSymptom() {
     const navigate = useNavigate();
@@ -10,9 +10,9 @@ export default function SearchSymptom() {
     const [targetSymptom, setTargetSymptom] = useState("");
     const [symptoms, setSymptoms] = useState([]);
     const [selectedSymptoms, setSelectedSymptoms] = useState([]);
-    const [resultPrediction, setResultPrediction] = useState([])
+    const [resultPrediction, setResultPrediction] = useState([]);
 
-    const mostPopular = symptoms.slice(0, 5);    
+    const mostPopular = symptoms.slice(0, 5);
 
     useEffect(() => {
         fetchSymptoms();
@@ -25,9 +25,9 @@ export default function SearchSymptom() {
     }, [resultPrediction]);
 
     const fetchSymptoms = async () => {
-        console.log("Fetching...");
         try {
             const response = await axios.get(`${API_URL}symptoms/`);
+            // console.log(response.data);
             setSymptoms(response.data);
         } catch (error) {
             console.error("Error fetching symptoms: " + error);
@@ -36,14 +36,12 @@ export default function SearchSymptom() {
 
     const sendSelectedSymptoms = async () => {
         try {
-            const response = await axios.post(
-                `${API_URL}predict/`,
-                {
-                    symptoms: selectedSymptoms,
-                }
-            );
-            setResultPrediction(response.data.result[0]);
-            // console.log(response.data.result[0]);
+            const response = await axios.post(`${API_URL}predict/`, {
+                symptoms: selectedSymptoms,
+            });
+            // console.log(selectedSymptoms);
+            console.log(response.data);
+            setResultPrediction(response.data.result[0].trimEnd());
         } catch (error) {
             console.error("Error sending symptoms: " + error);
         }
@@ -51,19 +49,23 @@ export default function SearchSymptom() {
 
     const getDiseaseIdByName = async () => {
         try {
-            console.log(resultPrediction);
-            const response = await axios.get(`${API_URL}diseaseId/${resultPrediction}`);
-            // console.log(response.data);
+            const response = await axios.get(
+                `${API_URL}diseaseId/${resultPrediction}`
+            );
+            // console.log(response);
             navigate(`/result/${response.data.id}`);
-        }
-        catch(error) {
+        } catch (error) {
             console.error("Error getting id of disease! " + error);
         }
     };
 
     const handleOnContinueClick = async () => {
-        await sendSelectedSymptoms();
-        await getDiseaseIdByName();
+        if (selectedSymptoms.length != 0) {
+            await sendSelectedSymptoms();
+            await getDiseaseIdByName();
+        } else {
+            alert("Please select at least one symptom before continuing!");
+        }
     };
 
     const handleOnSymptomClick = (symptom) => {
@@ -83,9 +85,13 @@ export default function SearchSymptom() {
 
     return (
         <div className="search-symptom-container">
-            <h1 class="search-symptom-title">
-                Search for symptoms
-            </h1>
+            <RedirectButton
+                name="Back to Home"
+                redirectTo={"/home"}
+                style={{'margin-top': '30px', 'margin-left': '20px'}}
+                className="btn-back-to-home"
+            />
+            <h1 className="search-symptom-title">Search for symptoms</h1>
             <form className="search-symptom-form" onSubmit={handleSubmit}>
                 <div
                     style={{
@@ -112,27 +118,27 @@ export default function SearchSymptom() {
                         <div className="search-symptom-dropdown">
                             {symptoms !== null
                                 ? symptoms
-                                      .filter((el) => {
-                                          if (targetSymptom === "") return;
-                                          return el.name
-                                              .toLowerCase()
-                                              .includes(targetSymptom);
-                                      })
-                                      .map((targetSymptom) => (
-                                          <div
-                                              className="searched-symptom-option"
-                                              onClick={() =>
-                                                  handleOnSymptomClick(
-                                                      targetSymptom
-                                                  )
-                                              }
-                                          >
-                                              <p style={{ margin: "0" }}>
-                                                  {targetSymptom.name}
-                                              </p>
-                                          </div>
-                                      ))
-                                      .slice(0, 5)
+                                    .filter((el) => {
+                                        if (targetSymptom === "") return;
+                                        return el.name
+                                            .toLowerCase()
+                                            .includes(targetSymptom);
+                                    })
+                                    .map((targetSymptom) => (
+                                        <div
+                                            className="searched-symptom-option"
+                                            onClick={() =>
+                                                handleOnSymptomClick(
+                                                    targetSymptom
+                                                )
+                                            }
+                                        >
+                                            <p style={{ margin: "0" }}>
+                                                {targetSymptom.name}
+                                            </p>
+                                        </div>
+                                    ))
+                                    .slice(0, 5)
                                 : null}
                         </div>
                     </div>

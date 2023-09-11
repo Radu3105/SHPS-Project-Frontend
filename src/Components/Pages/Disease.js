@@ -14,7 +14,7 @@ export default function Disease() {
 
     const fetchDisease = async () => {
         try {
-            const response = await axios.get(`${API_URL}diseases/${id}`);
+            const response = await axios.get(`${API_URL}diseases/${id}`, { credentials: 'include' });
             // console.log(response.data);
             setDisease(response.data);
         } catch (error) {

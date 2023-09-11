@@ -21,7 +21,7 @@ export default function Register() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [dateOfBirth, setDateOfBirth] = useState("");
-    const [gender, setGender] = useState("");
+    const [gender, setGender] = useState("Male");
     const [weight, setWeight] = useState("");
     const [height, setHeight] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -108,11 +108,12 @@ export default function Register() {
                     <select
                         name="gender"
                         value={gender}
-                        defaultValue={"Male"}
-                        onChange={(e) => setGender(e.target.value)}
+                        onChange={(e) => {
+                        setGender(e.target.value);
+                        }}
                     >
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                     </select>
                     <h2>Weight (in kg)</h2>
                     <input
